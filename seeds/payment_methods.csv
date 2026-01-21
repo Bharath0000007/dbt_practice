@@ -1,0 +1,4 @@
+payment_method,payment_type
+card,online
+upi,online
+cash,offline

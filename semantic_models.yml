@@ -1,0 +1,29 @@
+semantic_models:
+  - name: orders
+    model: ref('fct_orders_append')   # Points to your incremental table
+    description: "Fact table of customer orders"
+
+    entities:
+      - name: order_id
+        type: primary
+      - name: customer
+        type: foreign
+        expr: customer_id
+
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+
+    measures:
+      - name: total_amount
+        description: "Total order amount"
+        agg: sum
+        expr: order_amount
+      - name: order_count
+        description: "Number of orders"
+        agg: sum
+        expr: 1

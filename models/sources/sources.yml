@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: DBT_PRACTICE
+    schema: SOURCES
+    tables:
+      - name: customers
+      - name: orders
+      - name: payments
+      - name: products

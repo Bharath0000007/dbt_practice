@@ -1,0 +1,26 @@
+metrics:
+  - name: total_order_amount
+    type: simple
+    description: "Total amount of all orders"
+    type_params:
+      measure: total_amount
+
+  - name: total_orders
+    type: simple
+    description: "Count of all orders"
+    type_params:
+      measure: order_count
+
+  - name: completed_orders
+    type: simple
+    description: "Number of completed orders"
+    type_params:
+      measure: order_count
+    filter: "{{ Dimension('status') }} = 'completed'"
+
+  - name: pending_orders
+    type: simple
+    description: "Number of pending orders"
+    type_params:
+      measure: order_count
+    filter: "{{ Dimension('status') }} = 'pending'"

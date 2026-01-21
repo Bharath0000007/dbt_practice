@@ -1,0 +1,32 @@
+name: 'dbt_practice'   # lowercase, underscores only
+version: '1.0.0'
+
+# The profile to use from ~/.dbt/profiles.yml
+profile: 'dbt_practice'
+
+# Where dbt looks for different types of files
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Directories removed by `dbt clean`
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Default model configurations by folder
+models:
+  dbt_practice:
+    staging:              # Bronze
+      +materialized: table
+    intermediate:         # Silver
+      +materialized: table
+    marts:                # Gold
+      +materialized: table
+    marts_incremental:    # Incremental Gold
+      +materialized: incremental
+    example:              # optional folder
+      +materialized: view

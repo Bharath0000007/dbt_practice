@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: stg_payments
+    description: "Staging table for raw payments data"
+    columns:
+      - name: payment_id
+        description: "Unique payment identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Associated order ID"
+        tests:
+          - not_null
+
+      - name: payment_amount
+        description: "Payment amount, must be at least 450"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 450
+
+      - name: payment_date
+        description: "Date of payment"
+        tests:
+          - not_null
+
+      - name: payment_method
+        description: "Payment method used"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['card']
