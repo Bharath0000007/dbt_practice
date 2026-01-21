@@ -1,0 +1,13 @@
+dbt_practice:
+  outputs:
+    dev:
+      account: WGUSCRQ-VXB90227
+      database: dbt_practice
+      password: Vert@ex1234567
+      role: accountadmin
+      schema: sources
+      threads: 5
+      type: snowflake
+      user: BHARATHDBT
+      warehouse: compute_wh
+  target: dev
