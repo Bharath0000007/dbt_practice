@@ -2,7 +2,7 @@ name: 'dbt_practice'   # lowercase, underscores only
 version: '1.0.0'
 
 # The profile to use from ~/.dbt/profiles.yml
-profile: 'dbt_practice'
+profile: 'profiles'
 
 # Where dbt looks for different types of files
 model-paths: ["models"]
