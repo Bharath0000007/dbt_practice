@@ -1,0 +1,27 @@
+name: dbt Run & Snapshot
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'   # runs every 1 minute
+  workflow_dispatch:
+
+jobs:
+  dbt_run_snapshot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install dbt-snowflake
+      - run: |
+          mkdir -p ~/.dbt
+          echo "$DBT_PROFILES" > ~/.dbt/profiles.yml
+        env:
+          DBT_PROFILES: ${{ secrets.DBT_PROFILES }}
+      - run: dbt deps
+      - run: dbt run
+      - run: dbt snapshot
+
+
